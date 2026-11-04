@@ -1,0 +1,6 @@
+Component: codex-chatgpt-web
+Version: 6.1.17 (package.json; README version differed)
+Repository: https://github.com/miuuyy/codex-chatgpt-web
+Pinned commit: 860fa576eb47d9e20d7d8289235bfea94392d2fd
+License: MIT; full LICENSE from that exact quarantined commit is codex-chatgpt-web-LICENSE-MIT.txt
+Copy/derivation scope: selected `codex-chatgpt-web` adapter source and retained dependency closure, plus the single `launcher/electron/chatgpt-auth-session.cjs` helper used by Biscuit's Electron bridge. The upstream CLI/setup/server/MCP/tunnel/full Electron launcher and unrelated dependency trees are excluded. The existing static provenance review identifies `readChatGptAuthSession` as reused from this pinned commit; it does not assert byte-for-byte unmodified status for the helper. Biscuit-owned `electron-main.cjs`, `electron-driver.ts`, `error-categories.ts`, and `request-lifecycle.ts` are separate bridge inputs. The official Electron 41.10.7 runtime is downloaded after user confirmation and is not bundled; Bun 1.4.0 is external build/test tooling only.

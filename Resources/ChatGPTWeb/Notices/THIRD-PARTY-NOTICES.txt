@@ -1,0 +1,66 @@
+Biscuit — third-party software notices
+
+This notice set covers the code and runtime packages selected for the ChatGPT Web browser adapter. It is not a complete notice set for unused upstream server/MCP/launcher features.
+
+UPSTREAM ADAPTER
+
+codex-chatgpt-web 6.1.17, MIT
+Source: https://github.com/miuuyy/codex-chatgpt-web
+Inspected commit: 860fa576eb47d9e20d7d8289235bfea94392d2fd
+Required license text: upstream/codex-chatgpt-web-LICENSE-MIT.txt
+The upstream copyright and MIT permission/disclaimer text must accompany any redistributed copied/derived upstream code.
+
+RETAINED RUNTIME PACKAGES
+
+Package version                         License          Required copyright / notice
+@mixmark-io/domino 2.2.0                 BSD-2-Clause     Mozilla Foundation (2011)
+  packages/@mixmark-io/domino/2.2.0/LICENSE
+ajv 8.20.0                               MIT              Evgeny Poberezkin (2015–2021)
+  packages/ajv/8.20.0/LICENSE
+ajv-formats 3.0.1                        MIT              Evgeny Poberezkin (2020)
+  packages/ajv-formats/3.0.1/LICENSE
+playwright-core 1.62.0                   Apache-2.0       Microsoft Corporation; portions Google Inc. (2017)
+  packages/playwright-core/1.62.0/LICENSE
+  packages/playwright-core/1.62.0/NOTICE (includes Puppeteer-derived-code attribution)
+tiktoken 1.0.22                          MIT              OpenAI and Shantanu Jain (2022)
+  packages/tiktoken/1.0.22/LICENSE
+  The npm archive did not contain a license file; this is the notice supplied by upstream codex-chatgpt-web.
+turndown 7.2.0                           MIT              Dom Christie (2017)
+  packages/turndown/7.2.0/LICENSE
+turndown-plugin-gfm 1.0.2                MIT              Dom Christie (2017)
+  packages/turndown-plugin-gfm/1.0.2/LICENSE
+zod 4.6.6                                MIT              Colin McDonnell (2025)
+  packages/zod/4.6.6/LICENSE
+fast-deep-equal 3.1.3                    MIT              Evgeny Poberezkin (2017)
+  packages/fast-deep-equal/3.1.3/LICENSE
+fast-uri 3.1.9                           BSD-3-Clause     Gary Court (2011–2021); Fastify team (2021–present)
+  packages/fast-uri/3.1.9/LICENSE
+json-schema-traverse 1.0.0               MIT              Evgeny Poberezkin (2017)
+  packages/json-schema-traverse/1.0.0/LICENSE
+require-from-string 2.0.2                MIT              Vsevolod Strukchinsky
+  packages/require-from-string/2.0.2/LICENSE
+
+The package texts above contain the complete license conditions, disclaimers and (where present) copyright attributions. Retain the relevant complete text files if redistributing the corresponding software. Versions are pinned to the inspected bun.lock for the current Electron-bridge dependency closure. The source closure also selects `launcher/electron/chatgpt-auth-session.cjs`; it does not include the upstream CLI/setup/server/MCP/tunnel or full Electron launcher. Developer/test dependencies and unrelated dependency trees are excluded.
+
+EXTERNAL BUILD/TEST TOOL — BUN 1.4.0 (NOT AN APP RUNTIME OR BUNDLED)
+
+Bun is externally supplied for building and testing the ChatGPT Web Electron bridge. Biscuit does not download Bun on first use, and the app does not bundle the Bun executable. A cold frozen-lock install may require package-registry access; a cached rebuild can use already available locked packages without network. Official upstream release reference (tag bun-v1.4.0; commit 34cbb9a40b4bd1bd767d134a7065e66c2432a676):
+https://github.com/oven-sh/bun/releases/tag/bun-v1.4.0
+Official license explanation and linked-library notices:
+https://bun.sh/docs/project/license
+Bun is MIT-licensed; its runtime also incorporates JavaScriptCore/WebKit under LGPL-2 and other separately listed components. The full version-specific upstream notice is supplied separately at optional-runtime-not-redistributed/Bun-1.4.0-licenses.txt for user information only; it is not notice for a binary shipped in Biscuit.
+
+Official source and relinking references:
+https://github.com/oven-sh/bun/tree/bun-v1.4.0
+https://github.com/oven-sh/bun/blob/bun-v1.4.0/scripts/build/deps/webkit.ts
+Pinned WebKit source commit: https://github.com/oven-sh/WebKit/tree/0f966e81b78c84bb23213e391bc679c4ef83e56b
+Bun's official license documentation describes rebuilding JavaScriptCore/Bun to relink modified WebKit. Any future decision to ship Bun inside Biscuit is a separate redistribution/compliance review; this informational section is not a substitute for satisfying obligations if distribution changes.
+
+Reference release downloads for this external tool only; Biscuit does not download them. Do not use a floating `latest` URL:
+macOS arm64: https://github.com/oven-sh/bun/releases/download/bun-v1.4.0/bun-darwin-aarch64.zip
+  SHA-256: c669e97f6164e1c96e0701748db98dfa77492908cbd8394c7557134a735de381
+macOS x86_64: https://github.com/oven-sh/bun/releases/download/bun-v1.4.0/bun-darwin-x64.zip
+  SHA-256: 1d0211b8f1dc991182344687ad15e72ee86f154845a5f7fa477994cd341dd9b0
+CURRENT CHATGPT WEB RUNTIME — OFFICIAL ELECTRON 41.10.7 (NOT BUNDLED)
+
+After explicit user confirmation, Biscuit downloads the official Electron 41.10.7 release archive and verifies the archive and executable SHA-256 before use. The runtime is not bundled. The app retains the complete extracted release in its private data folder; runtime verification requires the release-root `LICENSE` and `LICENSES.chromium.html` to remain readable there.

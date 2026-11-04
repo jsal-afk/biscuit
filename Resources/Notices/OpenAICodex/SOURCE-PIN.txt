@@ -1,0 +1,58 @@
+Component: OpenAI Codex login OAuth protocol (selected Swift adaptations)
+Repository: https://github.com/openai/codex
+Pinned commit: 0a944f8ce2b46f27890d5aa1c2b44917211b1fb8
+License: Apache-2.0; accompanying LICENSE and NOTICE are unchanged upstream files.
+Copyright 2025 OpenAI
+
+Upstream source base:
+https://github.com/openai/codex/blob/0a944f8ce2b46f27890d5aa1c2b44917211b1fb8/codex-rs/login/src/
+
+Derived production code in Sources/Biscuit/NativeAccount.swift:
+- oauth/authorization.rs CallbackParameters::from_url/validate -> callbackCode:
+  form query decoding, state-before-error-before-code ordering, empty-error presence.
+  Swift URLComponents, existing constant-time state comparison and stricter duplicate
+  rejection replace Rust Url/Option handling. Manual code#state completion remains
+  a Biscuit adaptation. No provider error description is displayed or logged.
+- oauth/client.rs OAuthClient::exchange_code/refresh -> authorizationCodeBody,
+  refreshBody and their browser/device/owned-refresh call sites: upstream grant
+  parameter sets, form-encoded code exchange and JSON ChatGPT refresh. Foundation
+  encoding replaces url::form_urlencoded/serde. Literal plus, reserved punctuation,
+  spaces and Unicode retain their meaning in the form body.
+- device_code_auth.rs deserialize_interval -> deviceCode: trim and parse unsigned
+  integer seconds without shortening a provider interval to 60 seconds. Reject
+  malformed supplied intervals instead of silently polling at a fallback cadence.
+  Retain Biscuit's numeric-JSON compatibility, 5-second omitted-field fallback,
+  and 1-second minimum to avoid a zero-delay loop. Existing device polling remains
+  bounded to 15 minutes; recheck expiry after sleeping before issuing another poll.
+
+Inspected and deliberately retained equivalent existing implementation:
+- oauth/pkce.rs S256 and unpadded base64url; authorization.rs 32-byte independent
+  state. Biscuit keeps its RFC7636-valid 32-byte verifier (upstream uses 64 bytes),
+  SecRandomCopyBytes and CryptoKit; no change to the shared Claude PKCE generator.
+- server.rs build_authorize_url: public client, scope, PKCE method and flow flags
+  already match. Keep query order and originator=biscuit, not codex_cli_rs.
+- server.rs /auth/callback, exchange_code_for_tokens; auth/manager.rs
+  request_chatgpt_token_refresh/persist_tokens: keep Network.framework listener,
+  existing loopback ports 1455/1457, URLSession transport and 30-second deadline,
+  AppKit browser opener, task generation guards, single-flight refresh and owned
+  Keychain storage. Biscuit remains responsible for storage/recovery. Optional
+  Codex import remains read-only and must never refresh imported credentials.
+
+Tests/AccountSmoke.swift adaptations:
+- oauth/authorization_tests.rs callback_validation_checks_state_before_code_or_provider_errors
+- oauth/client_tests.rs authorization_code_preserves_pkce_and_http_policy
+  Adapted to offline Swift serialization and existing fake-transport lifecycle
+  checks, plus duplicate, empty-error, invalid-state/missing-code and form-decoding
+  regressions. No new HTTP server, browser automation or test framework.
+- device-code regressions cover long/whitespace intervals, malformed intervals,
+  mismatched PKCE, cancelled issuance, terminal token-exchange HTTP 403 and
+  pending poll HTTP 403/404 followed by durable owned-session completion.
+
+Not incorporated: the CLI/runtime, Ratatui, upstream auth.json storage, workspace
+onboarding extensions, API-key token exchange, proxy setup or recovery framework.
+The full upstream NOTICE is retained; its Ratatui attribution describes upstream,
+not a Ratatui dependency in this Swift adaptation.
+
+Distribution: build.sh copies this directory into Contents/Resources/Notices;
+release.sh already includes Resources and the modified Swift sources/tests in its
+source allowlist.

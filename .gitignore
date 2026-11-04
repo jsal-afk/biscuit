@@ -1,0 +1,9 @@
+/build/
+/build-smoke/
+/dist/
+/vendor/
+/downloads/
+/upstream/web-provider/node_modules/
+/upstream/web-provider/dist/
+/upstream/codex-chatgpt-web/node_modules/
+/.DS_Store

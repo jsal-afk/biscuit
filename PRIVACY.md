@@ -1,0 +1,7 @@
+# Privacy
+
+Biscuit stores its library, captured images, history, notes, todos, and preferences in app-managed local data on this Mac. Native-account credentials managed by Biscuit are stored in macOS Keychain. ChatGPT Web sign-in uses a separate, persistent Biscuit-managed browser profile; personal browser profiles are not used.
+
+Apple Translation runs on this Mac. For Translate or Explain, Biscuit sends the text you explicitly submit to the selected, enabled provider. Image-title generation is off by default; when enabled, only local OCR text from images captured while enabled is sent to the selected, enabled provider/model. Those title requests do not send image bytes, backfill older images, or fall back to another provider. If you separately attach images or files to a provider request, those submitted attachments are sent to that service. Connection checks may contact a provider without submitting your prompt.
+
+ChatGPT Web requires network access and a signed-in account; provider terms, data handling, and usage limits apply. Its optional Electron runtime is downloaded only after confirmation and is checksum-verified; it is not bundled. Biscuit cannot control third-party processing, retention, availability, or limits.

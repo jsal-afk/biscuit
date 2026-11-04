@@ -1,0 +1,7 @@
+Component: codex-chatgpt-web
+Version: 6.1.17
+Repository: https://github.com/miuuyy/codex-chatgpt-web
+Pinned inspected commit: 860fa576eb47d9e20d7d8289235bfea94392d2fd
+License: MIT; see LICENSE and Resources/ChatGPTWeb/Notices/THIRD-PARTY-NOTICES.txt
+
+The 56-file source closure records the pinned browser request parser, ChatGPT Web adapter, model routing, login/session lifecycle, and statically required imports. It excludes the upstream CLI, setup, standalone server, stream diagnostics, and unrelated dependency trees. The current Biscuit runtime uses its app-managed Electron 41.10.7 bridge (`electron-main.cjs` and `electron-driver.ts`), not the older `browserHost=managed-chrome`/fresh-Chrome-profile description in legacy notes. The release source closure selects only `launcher/electron/chatgpt-auth-session.cjs` for browser-session validation; the existing provenance review marks `readChatGptAuthSession` as reused from this pinned commit without asserting that the helper's present bytes are unmodified. No upstream Electron executable or full launcher is included. Biscuit-specific reviewed source patches remain local to Biscuit; the pinned commit remains the upstream base.

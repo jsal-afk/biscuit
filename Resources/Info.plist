@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleLocalizations</key>
+<array>
+<string>ar</string><string>cs</string><string>da</string><string>de</string>
+<string>en</string><string>es</string><string>fr</string><string>id</string>
+<string>it</string><string>ja</string><string>ko</string><string>ms</string>
+<string>nb</string><string>nl</string><string>nn</string><string>pl</string>
+<string>pt-BR</string><string>ro</string><string>ru</string><string>sv</string>
+<string>th</string><string>tr</string><string>uk</string><string>vi</string>
+<string>yue-Hans</string><string>yue-Hant</string><string>zh-Hans</string><string>zh-Hant</string>
+</array>
+<key>CFBundleName</key><string>biscuit</string>
+<key>CFBundleDisplayName</key><string>biscuit</string>
+<key>CFBundleIdentifier</key><string>org.biscuit.app</string>
+<key>CFBundleExecutable</key><string>biscuit</string>
+<key>CFBundlePackageType</key><string>APPL</string>
+<key>CFBundleIconFile</key><string>biscuit</string>
+<key>CFBundleShortVersionString</key><string>1.0.0</string>
+<key>CFBundleVersion</key><string>1</string>
+<key>LSMinimumSystemVersion</key><string>14.0</string>
+<key>LSUIElement</key><true/>
+<key>NSHighResolutionCapable</key><true/>
+<key>NSHumanReadableCopyright</key><string>Copyright 2026 biscuit contributors. MIT license.</string>
+<key>NSScreenCaptureUsageDescription</key><string>biscuit captures only areas you select, for local OCR or image copying.</string>
+</dict></plist>
