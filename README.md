@@ -1,4 +1,4 @@
-# Biscuit: It's just an open-source version of [cracker.im](https://cracker.im). Or even better. Or maybe with no API usage at all.
+# Biscuit: It's just an FULL open-source version of [cracker.im](https://cracker.im). Or even better. Or maybe with no API usage at all.
 
 **English** | [한국어](README.ko.md)
 
@@ -6,7 +6,7 @@ Biscuit is a macOS menu-bar app for capturing text and images, translating, stud
 
 ## Install
 
-Ask your agent to install Biscuit with [this link](https://github.com/jsal-afk/biscuit).
+Just ask your agent to install Biscuit with [this link](https://github.com/jsal-afk/biscuit). Please.
 
 ### For a manual installation (If you really want to)
 
