@@ -1,12 +1,16 @@
-# Biscuit: It's just an open-source version of cracker.im. Or even better. Or maybe with no API usage at all.
+# Biscuit: It's just an open-source version of [cracker.im](https://cracker.im). Or even better. Or maybe with no API usage at all.
+
+**English** | [한국어](README.ko.md)
 
 Biscuit is a macOS menu-bar app for capturing text and images, translating, studying languages, and keeping a small to-do list at the edge of your screen. Local features are free, with no app subscription or paid feature lock. Text history and image retention are unlimited by default; you can set an image limit yourself.
 
 ## Install
 
-Paste this repository's URL into your agent and ask it to install Biscuit.
+Ask your agent to install Biscuit with [this link](https://github.com/jsal-afk/biscuit).
 
-For a manual installation, download the macOS universal app archive from Releases, unzip it, and move `biscuit.app` to Applications. Open the app and allow screen recording when you first use capture. If macOS asks you to reopen Biscuit after granting permission, do so.
+### For a manual installation (If you really want to)
+
+Download the macOS universal app archive from [Releases](https://github.com/jsal-afk/biscuit/releases/latest), unzip it, and move `biscuit.app` to Applications. Open the app and allow screen recording when you first use capture. If macOS asks you to reopen Biscuit after granting permission, do so.
 
 Biscuit supports macOS 14 or later on Apple Silicon and Intel. Apple On-Device Translation requires macOS 15 or later and a supported language pair. Current builds are ad-hoc signed rather than Apple-notarized; source build instructions are below.
 
