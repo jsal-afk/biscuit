@@ -275,6 +275,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSMe
         menu.delegate = self
         let heading = menu.addItem(withTitle: BiscuitLocalization.string("biscuit · local by default"), action: nil, keyEquivalent: "")
         heading.isEnabled = false
+        menu.addItem(.separator())
         add(menu, "Capture & Copy Image", #selector(imageArea), shortcutIndex: 4)
         add(menu, "Capture Scrolling Image…", #selector(scrollingImage), shortcutIndex: 5)
         add(menu, "Capture Area & Copy", #selector(copyArea), shortcutIndex: 0)
@@ -283,7 +284,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSMe
         add(menu, "Capture Area & Learn", #selector(learnArea), shortcutIndex: 2)
         add(menu, "Learn from Last Result", #selector(learnLast))
         add(menu, "Open Study Notes", #selector(showStudyNotes))
+        menu.addItem(.separator())
         add(menu, "Todos", #selector(showTodos), shortcutIndex: 3)
+        menu.addItem(.separator())
 
         menu.addItem(recentItemsMenuItem(kind: .text, title: "Recent Results"))
         menu.addItem(recentItemsMenuItem(kind: .image, title: "Recent Images"))
@@ -296,12 +299,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSMe
         more.submenu = moreMenu
         menu.addItem(more)
         menu.addItem(.separator())
+        add(menu, "Settings…", #selector(showSettings))
+        add(menu, "Permissions & Getting Started…", #selector(permissions))
         let summary = menu.addItem(
             withTitle: BiscuitLocalization.string("Measurement Summary…"),
             action: #selector(showMeasurementSummary),
             keyEquivalent: ""
         )
         summary.target = self
+        menu.addItem(.separator())
+        add(menu, "About biscuit", #selector(about))
         let check = menu.addItem(
             withTitle: BiscuitLocalization.string(updateCheckInProgress ? "Checking for Updates…" : "Check for Updates…"),
             action: #selector(checkForUpdates),
@@ -326,9 +333,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSMe
 #else
         install.isEnabled = availableUpdate != nil && !updateCheckInProgress && !updateInstallationInProgress
 #endif
-        add(menu, "Settings…", #selector(showSettings))
-        add(menu, "Permissions & Getting Started…", #selector(permissions))
-        add(menu, "About biscuit", #selector(about))
         add(menu, "Quit biscuit", #selector(quit))
         status.menu = menu
     }
