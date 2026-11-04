@@ -41,7 +41,8 @@ cp "$ROOT/upstream/web-provider/error-categories.ts" \
   "$ROOT/upstream/web-provider/request-lifecycle.ts" "$ROOT/upstream/web-provider/run-turn.ts" "$STAGE_WEB/"
 cp "$ROOT/upstream/web-provider/electron-driver.ts" "$STAGE_WEB/"
 cp "$ROOT/upstream/web-provider/tests/protocol.test.ts" \
-  "$ROOT/upstream/web-provider/tests/electron-driver-contract.test.ts" "$STAGE_WEB/tests/"
+  "$ROOT/upstream/web-provider/tests/electron-driver-contract.test.ts" \
+  "$ROOT/upstream/web-provider/tests/packaged-dependencies.test.ts" "$STAGE_WEB/tests/"
 cp -R "$ROOT/upstream/codex-chatgpt-web/src" "$STAGE_UPSTREAM/src"
 cp "$ROOT/upstream/codex-chatgpt-web/launcher/electron/chatgpt-auth-session.cjs" \
   "$STAGE_UPSTREAM/launcher/electron/"
@@ -52,7 +53,7 @@ ln -s "$RESOURCE/node_modules" "$STAGE_ROOT/node_modules"
   export TMPDIR="$STAGE/tmp"
   export NODE_PATH="$RESOURCE/node_modules"
   export BISCUIT_ELECTRON_CONTRACT_DRIVER="$RESOURCE/electron-driver.cjs"
-  "$BUN" test --reporter=junit --reporter-outfile="$REPORT" ./web-provider/tests/protocol.test.ts ./web-provider/tests/electron-driver-contract.test.ts
+  "$BUN" test --reporter=junit --reporter-outfile="$REPORT" ./web-provider/tests/protocol.test.ts ./web-provider/tests/electron-driver-contract.test.ts ./web-provider/tests/packaged-dependencies.test.ts
 )
 if ! grep -Fq 'current Electron driver offline consumer contract in an isolated child' "$REPORT"; then
   printf 'Packaged Electron driver consumer contract did not run.\n' >&2

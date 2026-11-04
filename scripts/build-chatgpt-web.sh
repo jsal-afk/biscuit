@@ -12,6 +12,23 @@ UPSTREAM_SOURCE="$ROOT/upstream/codex-chatgpt-web"
 DEPENDENCY_ROOT="$ROOT/upstream"
 RESOURCE="$APP/Contents/Resources/ChatGPTWeb"
 
+# The emitted Node/Electron driver reaches these six runtime packages. Keep
+# executable JS, both module formats, locales and deferred Playwright assets
+# byte-for-byte; only remove unused packages and development/alternate inputs.
+finalize_runtime() {
+  rm -rf "$RESOURCE/node_modules/ajv" "$RESOURCE/node_modules/ajv-formats" \
+    "$RESOURCE/node_modules/fast-deep-equal" "$RESOURCE/node_modules/fast-uri" \
+    "$RESOURCE/node_modules/json-schema-traverse" "$RESOURCE/node_modules/require-from-string"
+  # get_encoding uses the original full WASM, not the separate encoder/lite copies.
+  rm -rf "$RESOURCE/node_modules/tiktoken/encoders" "$RESOURCE/node_modules/tiktoken/lite" \
+    "$RESOURCE/node_modules/@mixmark-io/domino/test" "$RESOURCE/node_modules/@mixmark-io/domino/.yarn" \
+    "$RESOURCE/node_modules/zod/src" "$RESOURCE/node_modules/playwright-core/types"
+  find "$RESOURCE/node_modules" -type f \
+    \( -name '*.d.ts' -o -name '*.d.cts' -o -name '*.d.mts' \) -delete
+  rm -rf "$RESOURCE/Notices"
+  cp -R "$ROOT/Resources/ChatGPTWeb/Notices" "$RESOURCE/Notices"
+}
+
 PREBUILT_RESOURCE="${BISCUIT_PREBUILT_CHATGPT_WEB:-}"
 if [[ -n "$PREBUILT_RESOURCE" ]]; then
   for FILE in "$PREBUILT_RESOURCE/electron-main.cjs" \
@@ -28,7 +45,7 @@ if [[ -n "$PREBUILT_RESOURCE" ]]; then
   fi
   mkdir -p "$APP/Contents/Resources"
   cp -R "$PREBUILT_RESOURCE" "$RESOURCE"
-  rm -rf "$RESOURCE/node_modules/zod/src/v4/classic/tests"
+  finalize_runtime
   printf 'Reused the caller-selected complete ChatGPT Web resource in %s\n' "$RESOURCE"
   exit 0
 fi
@@ -77,13 +94,7 @@ mkdir -p "$RESOURCE/node_modules/@mixmark-io"
 cp "$WEB_SOURCE/electron-main.cjs" "$RESOURCE/electron-main.cjs"
 for PACKAGE in \
   '@mixmark-io/domino' \
-  ajv \
-  ajv-formats \
-  fast-deep-equal \
-  fast-uri \
-  json-schema-traverse \
   playwright-core \
-  require-from-string \
   tiktoken \
   turndown \
   turndown-plugin-gfm \
@@ -92,8 +103,5 @@ for PACKAGE in \
   mkdir -p "$RESOURCE/node_modules/$(dirname "$PACKAGE")"
   cp -R "$SOURCE_PACKAGE" "$RESOURCE/node_modules/$PACKAGE"
 done
-# Development fixtures are not part of the packaged runtime dependency closure.
-rm -rf "$RESOURCE/node_modules/zod/src/v4/classic/tests"
-rm -rf "$RESOURCE/Notices"
-cp -R "$ROOT/Resources/ChatGPTWeb/Notices" "$RESOURCE/Notices"
-printf 'Built the pinned ChatGPT Web Electron bridge and its locked 12-package request-helper closure in %s\n' "$RESOURCE"
+finalize_runtime
+printf 'Built the pinned ChatGPT Web Electron bridge and its locked six-package runtime closure in %s\n' "$RESOURCE"

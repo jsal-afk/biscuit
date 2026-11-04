@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+- Reduce the bundled ChatGPT Web payload by excluding unreachable packages and unused development/type/source distributions; retain the original tokenizer WASM, browser runtime assets, locales and complete notices.
+- Apply the same runtime selection to fresh and prebuilt packaging, with packaged offline regressions for tokenization, Markdown conversion, deferred WebP assets and non-destructive CDP disconnect.
+- Include the English and Korean READMEs in the source archive.
+
 ## 1.0.0
 
 - Local capture, OCR, scrolling capture, image editing, searchable history, language study, and edge-access todos.

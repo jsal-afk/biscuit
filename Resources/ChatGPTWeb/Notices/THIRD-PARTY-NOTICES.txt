@@ -10,7 +10,7 @@ Inspected commit: 860fa576eb47d9e20d7d8289235bfea94392d2fd
 Required license text: upstream/codex-chatgpt-web-LICENSE-MIT.txt
 The upstream copyright and MIT permission/disclaimer text must accompany any redistributed copied/derived upstream code.
 
-RETAINED RUNTIME PACKAGES
+LOCKED PACKAGE NOTICES (RUNTIME AND BUILD-ONLY)
 
 Package version                         License          Required copyright / notice
 @mixmark-io/domino 2.2.0                 BSD-2-Clause     Mozilla Foundation (2011)
@@ -41,6 +41,8 @@ require-from-string 2.0.2                MIT              Vsevolod Strukchinsky
   packages/require-from-string/2.0.2/LICENSE
 
 The package texts above contain the complete license conditions, disclaimers and (where present) copyright attributions. Retain the relevant complete text files if redistributing the corresponding software. Versions are pinned to the inspected bun.lock for the current Electron-bridge dependency closure. The source closure also selects `launcher/electron/chatgpt-auth-session.cjs`; it does not include the upstream CLI/setup/server/MCP/tunnel or full Electron launcher. Developer/test dependencies and unrelated dependency trees are excluded.
+
+The packaged Node/Electron bridge contains six runtime packages: @mixmark-io/domino, playwright-core, tiktoken, turndown, turndown-plugin-gfm and zod. The AJV dependency chain (ajv, ajv-formats, fast-deep-equal, fast-uri, json-schema-traverse and require-from-string) remains pinned for the upstream build inputs but is not reachable from this bridge and is not bundled. Its complete license texts remain here for provenance. Packaging excludes unused development/type/source trees and separate tiktoken encoder/lite distributions; the original full tokenizer WASM, both runtime module formats, Zod locales and all deferred Playwright assets remain unchanged. Fresh and prebuilt resource paths apply the same selection and stage this notice set.
 
 EXTERNAL BUILD/TEST TOOL — BUN 1.4.0 (NOT AN APP RUNTIME OR BUNDLED)
 

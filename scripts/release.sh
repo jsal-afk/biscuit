@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-VERSION=1.0.0
+VERSION=1.0.1
 BUILD_DIR="${BISCUIT_BUILD_DIR:-$ROOT/build}"
 RELEASE_DIR="${BISCUIT_RELEASE_DIR:-$ROOT/dist}"
 PUBLIC_CONTENT_DIR="${BISCUIT_PUBLIC_CONTENT_DIR:-$ROOT}"
@@ -50,9 +50,11 @@ cp "$ROOT/upstream/web-provider/electron-main.cjs" "$ROOT/upstream/web-provider/
   "$ROOT/upstream/web-provider/error-categories.ts" "$ROOT/upstream/web-provider/request-lifecycle.ts" \
   "$ROOT/upstream/web-provider/run-turn.ts" "$SRC/upstream/web-provider/"
 cp "$ROOT/upstream/web-provider/tests/protocol.test.ts" \
-  "$ROOT/upstream/web-provider/tests/electron-driver-contract.test.ts" "$SRC/upstream/web-provider/tests/"
+  "$ROOT/upstream/web-provider/tests/electron-driver-contract.test.ts" \
+  "$ROOT/upstream/web-provider/tests/packaged-dependencies.test.ts" "$SRC/upstream/web-provider/tests/"
 cp "$ROOT/LICENSE" "$SRC/"
-cp "$PUBLIC_CONTENT_DIR/README.md" "$PUBLIC_CONTENT_DIR/PRIVACY.md" "$PUBLIC_CONTENT_DIR/CHANGELOG.md" \
+cp "$PUBLIC_CONTENT_DIR/README.md" "$PUBLIC_CONTENT_DIR/README.ko.md" \
+  "$PUBLIC_CONTENT_DIR/PRIVACY.md" "$PUBLIC_CONTENT_DIR/CHANGELOG.md" \
   "$PUBLIC_CONTENT_DIR/.gitignore" "$SRC/"
 mkdir -p "$SRC/docs/images"
 cp "$PUBLIC_CONTENT_DIR/docs/images/translation.png" "$PUBLIC_CONTENT_DIR/docs/images/language-learning.png" \
