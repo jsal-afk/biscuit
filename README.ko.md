@@ -1,4 +1,4 @@
-# Biscuit: [cracker.im](https://cracker.im)의 오픈소스 버전입니다. 어쩌면 더 좋을 수도, API를 전혀 쓰지 않을 수도 있습니다.
+# Biscuit: [cracker.im](https://cracker.im)의 오픈소스 버전. 더 좋을 수도 있고, 무엇보다 chat 사용량을 그대로 사용하세요.
 
 [English](README.md) | **한국어**
 
